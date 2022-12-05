@@ -1,3 +1,4 @@
+import { ApolloError } from 'apollo-server';
 import { MongoClient } from 'mongodb';
 import _ from "lodash";
 
@@ -25,7 +26,7 @@ const deleteOne = async (args) => {
             return null;
         }
 
-        throw new HttpError(404);
+        throw new ApolloError(404);
     }
 
     return response;
@@ -40,7 +41,7 @@ const findOne = async (args) => {
             return null;
         }
 
-        throw new HttpError(404);
+        throw new ApolloError(404);
     }
 
     return response;
@@ -72,7 +73,7 @@ const updateOne = async (args) => {
         return key.startsWith('$');
     });
 
-    const { value: response, lastErrorObject } = await cl.findOneAndUpdate(
+    const { value: response, lastApolloErrorObject } = await cl.findOneAndUpdate(
         args.filter,
         isAtomic
             ? args.data
@@ -82,8 +83,8 @@ const updateOne = async (args) => {
         args.options || {}
     );
 
-    if (!lastErrorObject?.updatedExisting) {
-        throw new HttpError(404);
+    if (!lastApolloErrorObject?.updatedExisting) {
+        throw new ApolloError(404);
     }
 
     return response;

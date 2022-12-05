@@ -1,4 +1,4 @@
 export default (args) => {
     console.log({ args })
-    return { token: "logado " + args.name }
+    return { token: "logado " + args.user + args.password }
 };

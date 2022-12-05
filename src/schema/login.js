@@ -7,6 +7,6 @@ export default gql`
     }
 
     type Mutation {
-        login(name:String!): Return
+        login(user:String!,password:String!): Return
     }
 `;
