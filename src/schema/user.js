@@ -1,13 +1,26 @@
 import { gql } from "apollo-server";
 
 export default gql`
-    type User{
-        name: String!
-        status: Boolean!
-        email: String
+    type Identifiers {
+        cpf:String!
+        registration:String!
+    }
+
+    type User {
+        identifiers: Identifiers!
+        label: String!
+    }
+
+    type TokenReturn {
+        token: String!
+    }
+
+    type Mutation {
+        storeUser(user:String!,password:String!): TokenReturn!
     }
 
     type Query {
-        user: User!
+        login(user:String!,password:String!):TokenReturn!
+        getUser(user:String!):User!
     }
 `;

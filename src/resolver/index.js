@@ -1,7 +1,7 @@
-import login from "./login.js";
+import report from "./report.js";
 import user from "./user.js";
 
 export default [
-    login,
+    report,
     user
 ];

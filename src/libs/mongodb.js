@@ -2,12 +2,12 @@ import { ApolloError } from 'apollo-server';
 import { MongoClient } from 'mongodb';
 import _ from "lodash";
 
-const client = new MongoClient('link');
+const client = new MongoClient('mongodb://localhost:27017');
 
 const collection = async (collection) => {
     await client.connect();
 
-    return client.db('database').collection(collection);
+    return client.db('mapping').collection(collection);
 };
 
 const count = async (args) => {
@@ -26,7 +26,7 @@ const deleteOne = async (args) => {
             return null;
         }
 
-        throw new ApolloError(404);
+        throw new ApolloError('NotFound');
     }
 
     return response;
@@ -34,14 +34,14 @@ const deleteOne = async (args) => {
 
 const findOne = async (args) => {
     const cl = await collection(args.collection);
-    const { value: response } = await cl.findOne(args.filter, args.options || {});
+    const response = await cl.findOne(args.filter, args.options || {});
 
     if (!response) {
         if (args.nullable) {
             return null;
         }
 
-        throw new ApolloError(404);
+        throw new ApolloError('NotFound');
     }
 
     return response;
@@ -84,7 +84,7 @@ const updateOne = async (args) => {
     );
 
     if (!lastApolloErrorObject?.updatedExisting) {
-        throw new ApolloError(404);
+        throw new ApolloError('NotFound');
     }
 
     return response;
