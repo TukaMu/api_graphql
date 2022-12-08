@@ -76,7 +76,8 @@ const storeUser = async (args) => {
             registration: cpf.isValid(args.user) ? '' : args.user
         },
         label: nanoid(10),
-        password: encryptedPassword
+        password: encryptedPassword,
+        type: 'default'
     };
 
     const token = jwt.sign(

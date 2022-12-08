@@ -49,7 +49,7 @@ const findOne = async (args) => {
 
 const find = async (args) => {
     const cl = await collection(args.collection);
-    const { value: response } = await cl.find(args.filter, args.options || {}).toArray();
+    const { value: response } = await cl.find(args.filter || {}, args.options || {}).toArray();
 
     return response;
 };
