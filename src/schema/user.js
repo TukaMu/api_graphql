@@ -13,10 +13,15 @@ export default gql`
 
     type TokenReturn {
         token: String!
+        type: String!
+    }
+
+    type StoreUSerTokenReturn {
+        token: String!
     }
 
     type Mutation {
-        storeUser(user:String!,password:String!): TokenReturn!
+        storeUser(user:String!,password:String!): StoreUSerTokenReturn!
     }
 
     type Query {

@@ -28,7 +28,7 @@ const login = async (args) => {
         throw new ApolloError("Invalid!");
     }
 
-    return { token: userData.token };
+    return { token: userData.token, type: userData.type };
 };
 
 const getUser = async (args) => {
