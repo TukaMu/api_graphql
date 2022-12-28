@@ -12,6 +12,7 @@ export default gql`
     }
 
     type Report {
+        authType:String!
         coordinates: Coordinates!
         password: Boolean!
         name: String!
@@ -47,6 +48,7 @@ export default gql`
             token:String!,
             coordinates:CoordinatesInput!,
             password:Boolean!,
+            authType:String!,
             name:String!,
             comment:String!
             ): Int!

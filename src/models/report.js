@@ -4,6 +4,7 @@ import mongodb from "../libs/mongodb.js";
 import { nanoid } from "nanoid";
 
 // {
+//     authType: "",
 //     coordinates:{
 //         lat: 0,
 //         lng: 0
@@ -72,6 +73,7 @@ const dashBoard = async (args) => {
 
 const storeReport = async (args) => {
     const newReport = {
+        authType: args.authType,
         coordinates: args.coordinates,
         password: args.password,
         name: args.name,
